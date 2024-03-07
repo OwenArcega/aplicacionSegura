@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js"></script>
+
+    <title>Cascaron</title>
+</head>
+<body>
+    <form id="signup_form" onsubmit="event.preventDefault()" action="#">
+        <h2>Sign Up</h2>
+        <label>User</label><input id="signup_user" type="text" required>
+        <label>Password</label><input id="signup_password" type="password" required>
+        <button id="signup_btn" type="submit">Sign Up</button>
+    </form>
+
+    <form id="login_form" onsubmit="event.preventDefault()" action="#">
+        <h2>Login</h2>
+        <label>User</label><input id="login_user" type="text" required>
+        <label>Password</label><input id="login_password" type="password" required>
+        <button id="login_btn" type="submit">Login</button>
+    </form>
+</body>
+</html>
