@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded",()=>{
         .then(data => {
             if(data.auth == 1){
                 alert("Acceso concedido, accediendo.")
+                sessionStorage.setItem("allowed", "true");
+                sessionStorage.setItem("username", username);
                 window.location = "main.html?username=" + username;
             } else{
                 alert("Aun no cuenta con acceso.")
