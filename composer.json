@@ -1,0 +1,17 @@
+{
+    "name": "colibecas/cascaron",
+    "autoload": {
+        "psr-4": {
+            "Colibecas\\Cascaron\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Owen Arcega",
+            "email": "owenarcega11@gmail.com"
+        }
+    ],
+    "require": {
+        "sonata-project/google-authenticator": "^2.3"
+    }
+}

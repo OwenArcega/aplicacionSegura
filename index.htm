@@ -3,23 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="index.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="index.css">
     <title>Cascaron</title>
 </head>
 <body>
-    <form id="signup_form" onsubmit="event.preventDefault()" action="#">
-        <h2>Sign Up</h2>
-        <label>User</label><input id="signup_user" type="text" required>
-        <label>Password</label><input id="signup_password" type="password" required>
-        <button id="signup_btn" type="submit">Sign Up</button>
-    </form>
+    <div class="container">
+        <div class="tabs">
+            <div id="loginTab" class="tab active" onclick="changeTab('login')">Login</div>
+            <div id="registerTab" class="tab" onclick="changeTab('register')">Register</div>
+        </div>
+        <div id="loginContent" class="content fade">
+            <h2>Login</h2>
+            <form id="login_form" onchange="hashLogin()" action="#" method="post" class="form register">
+                <label>Nombre de Usuario</label><input autocomplete="off" name="name" id="login_user" type="text" required>
+                <label>Correo</label><input autocomplete="off" name="correo" id="login_email" type="email" required>
+                <label>Contraseña</label><input autocomplete="off" name="password" id="login_password" type="password" required>
+                <button id="login_btn" type="submit">Login</button>
+                <div id="loginErrorMessage" class="error-message"></div>
+            </form>
+        </div>
+        <div id="registerContent" class="content" style="display: none;">
+            <h2>Register</h2>
+            <form id="signup_form" onchange="hash()" action="#" class="form login">
+                <label>Nombre de Usuario</label><input autocomplete="off" id="signup_user" type="text" required>
+                <label>Correo</label><input autocomplete="off" name="correo" id="signup_email" type="email" required>
+                <label>Contraseña</label><input autocomplete="off" id="signup_password" type="password" required>
+                <button id="signup_btn" type="submit">Register</button>
+                <div id="registerErrorMessage" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", ()=>{
+            sessionStorage.setItem("allowed", false);
+        });
 
-    <form id="login_form" onsubmit="event.preventDefault()" action="#">
-        <h2>Login</h2>
-        <label>User</label><input id="login_user" type="text" required>
-        <label>Password</label><input id="login_password" type="password" required>
-        <button id="login_btn" type="submit">Login</button>
-    </form>
+
+        let hashedPassword = "";
+        let hashedPasswordLogin = "";
+
+        const register_form = document.getElementById("signup_form");
+        register_form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            let name = document.getElementById("signup_user").value;
+            let email = document.getElementById("signup_email").value;
+            var registerErrorMessage = document.getElementById('registerErrorMessage');
+
+            if(!!name && !!hashedPassword && !!email){
+                registerErrorMessage.textContent = '';
+                fetch("register.php", {
+                    method: "POST",
+                    body: JSON.stringify({"name":name,"email": email,"password": hashedPassword}),
+                    headers: {
+                        "Content-type":"application/json; charset=UTF-8"
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.found){
+                        registerErrorMessage.textContent = "Nombre de usuario ya registrado, eliga otro";
+                    } else{
+                        registerErrorMessage.textContent = "";
+                        if(data.res == true){
+                            registerErrorMessage.textContent = ""
+                            sessionStorage.setItem("registering", "true");
+                            window.location.href = "authenticator.php"
+                        } else{
+                            registerErrorMessage.textContent = "Error, por favor vuelva a intentarlo"
+                        }
+                    }
+                })
+                .catch(error => { console.error('Error:', error);
+                });
+
+                } else{
+                    registerErrorMessage.textContent = 'Por favor llena todos los campos';
+                }
+            cleanForms()
+        });
+
+        function hash(){
+            let password = document.getElementById("signup_password").value;
+            const md = crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
+
+            return md.then(buffer => {
+                const byteArray = Array.from(new Uint8Array(buffer));
+                const hexCodes = byteArray.map(value => {
+                const hexCode = value.toString(16);
+                return hexCode.padStart(2, '0');
+                });
+
+                hashedPassword = hexCodes.join('');
+            });
+        }
+
+        const loginForm = document.getElementById("login_form");
+        loginForm.addEventListener("submit", (event)=>{
+            event.preventDefault();
+            let username = document.getElementById("login_user").value;
+            let email = document.getElementById("login_email").value;
+            let errorMessage = document.getElementById('loginErrorMessage');
+
+            if(!!username && !!email && !!hashedPasswordLogin){
+                errorMessage.textContent = '';
+
+                fetch("login.php", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "name":username,
+                        "email":email,
+                        "password":hashedPasswordLogin
+                    }),
+                    headers:{"Content-type":"application/json; charset=UTF-8"}
+                })
+                .then(response =>response.json())
+                .then(responseData => {
+                    if(responseData.admin){
+                        sessionStorage.setItem("admin", "true");
+                        window.location = 'admin.html';
+                    } else {
+                        if(responseData.found){
+                            fetch("validate.php", {
+                                method: "POST",
+                                body: JSON.stringify({
+                                    "username": username
+                                }),
+                                headers: {"Content-type":"application/json; charset=UTF-8"}
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                if(data.auth == "1"){
+                                    sessionStorage.setItem("allowed", "true");
+                                    sessionStorage.setItem("username", username);
+                                    window.location = 'authorization.html?username=' + username;
+                                } else if(data.auth == "0") {
+                                    window.location = "admin_response.html?username=" + username;
+                                }
+                            })
+                        } else{
+                            errorMessage.textContent = "Usuario no encontrado"
+                        }
+                    }
+                });
+                cleanForms()
+            } else{
+                errorMessage.textContent = 'Por favor llena todos los campos';
+            }
+            
+        })
+
+        function hashLogin(){
+            let password = document.getElementById("login_password").value;
+            const md = crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
+
+            return md.then(buffer => {
+                const byteArray = Array.from(new Uint8Array(buffer));
+                const hexCodes = byteArray.map(value => {
+                const hexCode = value.toString(16);
+                return hexCode.padStart(2, '0');
+                });
+
+                hashedPasswordLogin = hexCodes.join('');
+            });
+        }
+
+        function cleanForms(){
+            let inputs = document.querySelectorAll("input");
+            inputs.forEach(input => {
+                if (input.tagName.toLowerCase() === 'input') {
+                input.value = '';
+    }
+  });
+        }
+
+    </script>
+
+    <script>
+        // Cambio de pestañas
+    function changeTab(tab) {
+        if (tab === 'login') {
+            document.getElementById('loginTab').classList.add('active');
+            document.getElementById('registerTab').classList.remove('active');
+            document.getElementById('loginContent').classList.add('fade');
+            document.getElementById('registerContent').style.display = 'none';
+            document.getElementById('loginContent').style.display = 'block';
+        } else if (tab === 'register') {
+            document.getElementById('registerTab').classList.add('active');
+            document.getElementById('loginTab').classList.remove('active');
+            document.getElementById('registerContent').classList.add('fade');
+            document.getElementById('loginContent').style.display = 'none';
+            document.getElementById('registerContent').style.display = 'block';
+        }
+    }
+    </script>
 </body>
 </html>

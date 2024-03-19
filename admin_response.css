@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #C4EEF2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.message {
+    text-align: center;
+}
+
+.message h1 {
+    color: #025159;
+    font-size: 36px;
+}
+
+
+button{
+    width: 200px;
+    height: 42px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: medium;
+    background-color: #355070;
+    color: white;
+    border: 1px solid #355070;
+    border-radius: 5px;
+}
+
+button:hover{
+    background-color: #5d3279;
+    cursor: pointer;
+}

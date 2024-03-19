@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #C4EEF2;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #025159;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 24px;
+}
+
+.navbar-menu {
+    display: flex;
+}
+
+.menu-item {
+    margin-left: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-3px);
+}
+
+/* Animación al pasar el ratón sobre el menú */
+@keyframes menu-item-hover {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.menu-item:hover {
+    animation: menu-item-hover 0.5s ease;
+}
+
+/* Estilos de la tabla */
+.user_tb {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user_tb th, .user_tb td {
+    border: 1px solid #025159;
+    padding: 10px;
+    text-align: left;
+}
+
+.user_tb th {
+    background-color: #025159;
+    color: white;
+}
+
+.user_tb tr:nth-child(even) {
+    background-color: #7AB8BF;
+}
+
+.user_tb tr:hover {
+    background-color: #3E848C;
+}
+
+/* Estilos del botón de admisión */
+.admit-button {
+    background-color: #025159;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200px;
+}
+
+.admit-button:hover {
+    background-color: #37737a;
+}
+
+.deny-button{
+    background-color: rgb(114, 22, 22);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200px;
+}
+
+.deny-button:hover {
+    background-color: rgb(164, 32, 32);
+}

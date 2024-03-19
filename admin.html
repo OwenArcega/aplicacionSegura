@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Usuarios</title>
+    <link type="text/css" rel="stylesheet" href="admin.css">
+    <script src="admin.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">Admin Panel</div>
+        <div class="navbar-menu">
+            <a id="cerrarSesion" href="#" class="menu-item">Cerrar Sesion</a>
+        </div>
+    </nav>
+    
+    <div style="padding: 20px;">
+        <table class="user_tb">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Contraseña</th>
+                    <th>Permiso</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody id="tb_body">
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

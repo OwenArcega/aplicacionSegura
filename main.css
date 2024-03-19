@@ -1,0 +1,102 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #C4EEF2;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #025159;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 24px;
+}
+
+.navbar-menu {
+    display: flex;
+}
+
+.menu-item {
+    margin-left: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-3px);
+}
+
+/* Animación al pasar el ratón sobre el menú */
+@keyframes menu-item-hover {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.menu-item:hover {
+    animation: menu-item-hover 0.5s ease;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+}
+
+form{
+    margin-top: 20px;
+    display: flex;  
+    flex-direction: column;
+    gap: 15px;
+    width: 500px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #025159;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+button{
+    width: 15%;
+    height: 42px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: medium;
+    background-color: #355070;
+    color: white;
+    border: 1px solid #355070;
+    border-radius: 5px;
+}
+
+button:hover{
+    background-color: #5d3279;
+    cursor: pointer;
+}

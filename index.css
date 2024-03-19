@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #C4EEF2;
+    margin: 0;
+    padding: 0;
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #7AB8BF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    width: 500px;
+}
+
+/* Estilos de pestañas (login/registro) */
+.tabs {
+    display: flex;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    color: white;
+    background-color: #025159;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.tab:hover {
+    background-color: #3E848C;
+}
+
+.active {
+    background-color: #3E848C;
+}
+
+/* Estilos de contenido */
+.content {
+    padding: 20px;
+}
+
+/* Animación de cambio de contenido */
+.fade {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Estilos de formularios */
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #025159;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+button[type="submit"] {
+    background-color: #025159;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #3E848C;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: #FF6347;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}

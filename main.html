@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div id="header" class="navbar-brand">User Section</div>
+        <div class="navbar-menu">
+            <a id="cerrarSesion" href="#" class="menu-item">Cerrar Sesion</a>
+        </div>
+    </nav>
+    <div class="container">
+        <form id="user_data" action="#">
+            <h1>Cambie sus datos</h1>
+            <label for="nombre">Nombre</label>
+            <input autocomplete="off" id="nombre" type="text" required>
+            <label for="correo">Correo</label>
+            <input autocomplete="off" id="correo" type="email" required>
+            <label for="contrasena">Contraseña</label>
+            <input autocomplete="off" id="contrasena" type="password" required>
+            <button id="change_btn" type="submit">Cambiar datos</button>
+        </form>
+    </div>
+</body>
+</html>
