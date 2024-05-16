@@ -1,16 +1,10 @@
 <?php
     header('Content-Type: application/json');
 
-    require 'vendor/autoload.php';
-    use Dotenv\Dotenv;
-
-    $dotenv = Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
-
-    $server = $_ENV['SERVER'];
-    $db_username = $_ENV['DB_ADMIN'];
-    $db_password = $_ENV['DB_ADMIN_PASSWORD'];
-    $db_name = $_ENV['DB_NAME_ADMIN'];
+    $server = "localhost";
+    $db_username = "admin";
+    $db_password = "`x.xWCUtdmn5>V!a{(lS{?PI63(#PU[{";
+    $db_name = "user_control";
 
     $conn = new mysqli($server . ":3390", $db_username, $db_password, $db_name);
 
@@ -18,20 +12,21 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
+    $arr = array();
+
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $requestBody = file_get_contents('php://input');
         $jsonData = json_decode($requestBody, true);
-    
+        
         if ($jsonData !== null) {
-            $username = $conn->real_escape_string($jsonData['username']);
+            $usuario = $conn->real_escape_string($jsonData['usuario']);
+            $total = $conn->real_escape_string($jsonData['total']);
     
-            $sql = "SELECT autorizado FROM users WHERE nombre = '$username';";
+            $sql = "INSERT INTO compras VALUES('','$usuario',$total);";
             $result = $conn->query($sql);
         
-            if($result->num_rows > 0){
-                while($row = $result->fetch_assoc()) {
-                    echo json_encode(array("auth" => $row["autorizado"]));
-                }
+            if($result == true){
+                echo json_encode(array('res'=>true));
             }else{
                 echo json_encode(array("res"=>false));
                 die("". $conn->error);

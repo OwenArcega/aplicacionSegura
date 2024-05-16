@@ -1,8 +1,14 @@
 <?php
-    $server = "localhost";
-    $db_username = "admin";
-    $db_password = "`x.xWCUtdmn5>V!a{(lS{?PI63(#PU[{";
-    $db_name = "user_control";
+    require 'vendor/autoload.php';
+    use Dotenv\Dotenv;
+
+    $dotenv = Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+
+    $server = $_ENV['SERVER'];
+    $db_username = $_ENV['DB_ADMIN'];
+    $db_password = $_ENV['DB_ADMIN_PASSWORD'];
+    $db_name = $_ENV['DB_NAME_ADMIN'];
 
     $conn = new mysqli($server . ":3390", $db_username, $db_password, $db_name);
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Agregar Productos</title>
+    <link rel="stylesheet" type="text/css" href="admin_productos.css">
+    <script src="admin_productos.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">Admin Panel</div>
+        <div class="navbar-menu">
+            <a id="cambiarAcceso" href="#" class="menu-item">Solicitudes de Acceso</a>
+            <a id="cerrarSesion" href="#" class="menu-item">Cerrar Sesion</a>
+        </div>
+    </nav>
+    <div class="container">
+        <form id="productosForm" action="#">
+            <h1>Agregar Producto</h1>
+            <label for="nombre">Nombre de producto</label><input id="nombre" type="text" required>
+            <label for="cantidad">Cantidad del producto</label><input id="cantidad" type="number" min="0" required>
+            <label for="precio">Precio del producto</label><input id="precio" type="number" min="0" required>
+            <label for="descripcion">Descripcion del producto</label><input id="descripcion" type="text" required>
+            <label for="imagen">Imagen del produto (URL)</label><input id="imagen" type="text" required>
+            <button id="submitBtn" type="submit">Agregar</button>
+        </form>
+    </div>
+</body>
+</html>

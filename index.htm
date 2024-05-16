@@ -172,14 +172,13 @@
             inputs.forEach(input => {
                 if (input.tagName.toLowerCase() === 'input') {
                 input.value = '';
-    }
-  });
+                }
+            });
         }
 
     </script>
 
     <script>
-        // Cambio de pestañas
     function changeTab(tab) {
         if (tab === 'login') {
             document.getElementById('loginTab').classList.add('active');

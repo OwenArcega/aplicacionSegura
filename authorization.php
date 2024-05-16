@@ -1,10 +1,16 @@
 <?php
     header('Content-Type: application/json');
 
-    $server = "localhost";
-    $db_username = "admin";
-    $db_password = "`x.xWCUtdmn5>V!a{(lS{?PI63(#PU[{";
-    $db_name = "user_control";
+    require 'vendor/autoload.php';
+    use Dotenv\Dotenv;
+
+    $dotenv = Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+
+    $server = $_ENV['SERVER'];
+    $db_username = $_ENV['DB_ADMIN'];
+    $db_password = $_ENV['DB_ADMIN_PASSWORD'];
+    $db_name = $_ENV['DB_NAME_ADMIN'];
 
     $conn = new mysqli($server . ":3390", $db_username, $db_password, $db_name);
 
@@ -20,10 +26,15 @@
             $username = $jsonData['username'];
             $key = $jsonData['key'];
     
-            $sql = "SELECT clave FROM users WHERE nombre = '$username';";
-            $result = $conn->query($sql);
+            $sql = "SELECT clave FROM users WHERE nombre = :username;";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param(":username", $username);
+            $stmt->execute();
+
+            $stmt->store_result();
         
-            if($result->num_rows > 0){
+            if($stmt->num_rows > 0){
                 while($fila = $result->fetch_assoc()) {
                     require_once 'vendor/autoload.php';
                     $authenticator = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();   

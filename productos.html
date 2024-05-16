@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Compras</title>
+    <link rel="stylesheet" type="text/css" href="productos.css">
+    <script src="productos.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div id="header" class="navbar-brand">Comprar</div>
+            <div class="navbar-menu">
+                <a id="cuenta" href="#" class="menu-item">Cuenta</a>
+                <a id="cerrarSesion" href="#" class="menu-item">Cerrar Sesion</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <button id="abrir-carrito" class="open-button">Abrir Carrito</button>
+        <section class="main-container">
+            <div id="products-container" class="product-container">
+            </div>
+        </section>
+    </main>
+    <aside id="cart-aside">
+        <h2>Carrito de Compras</h2>
+        <button id="cart-close-btn" class="cart-close-btn">Cerrar Carrito</button>
+        <div id="cart-items"></div>
+        <div id="cart-summary">
+            <p id="resultado"></p>
+            <button id="checkout-btn">Realizar Compra</button>
+        </div>
+    </aside>
+</body>
+</html>

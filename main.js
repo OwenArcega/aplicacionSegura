@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         cerrarSesion.addEventListener("click", (event)=>{
             event.preventDefault()
             sessionStorage.clear();
-            console.log(sessionStorage.getItem("admin"));
             window.location = "index.htm";
         });
 
@@ -93,6 +92,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 .catch(err => console.error("Error " + err))
             });
 
+            const productsBtn = document.getElementById('seccionCompras');
+            productsBtn.addEventListener('click', (e)=>{
+                e.preventDefault();
+                window.location = 'productos.html?username=' + username;
+            })
         } else{
             window.location = "denied_access.html";
         }

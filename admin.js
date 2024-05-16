@@ -1,4 +1,3 @@
-
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
       window.location.reload();
@@ -82,6 +81,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
             });
         })
         .catch(err => console.error("Error: " + err))
+
+        const agregarProductosBtn = document.getElementById('agregarProductos');
+        agregarProductosBtn.addEventListener('click', (e)=>{
+            e.preventDefault();
+            window.location = 'admin_productos.html';
+        })
     } else{
         window.location = "denied_access.html";
     }
